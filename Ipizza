@@ -1,0 +1,640 @@
+#include <stdio.h>
+#include <windows.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<time.h>
+
+
+//Defines
+#define BLACK 0
+#define BLUE 1
+#define GRREN 2
+#define GREENBLUE 3
+#define RED 4
+#define PURPLE 5
+#define YELLOW 6
+#define WHITE 7
+#define GREY 8
+#define LIGHTBLUE 9
+#define LIGHTGREEN 10
+#define GREENWATER 11
+#define LIGHTRED 12
+#define LILAC 13
+#define LIGHTYELLOW 14
+#define BRIGHTWHITE 15
+
+//Funções
+void titulo();
+void textcolor(int i);
+void gotoxy(int x, int y);
+void inter();
+void desenho();
+void cadast();
+void cadastrar_func();
+void telalogin();
+void menuadmin();
+void consulta();
+void altera_login();
+
+//Função textcolor
+void textcolor(int i){ //função textcolor
+
+	 HANDLE h1 = GetStdHandle(STD_OUTPUT_HANDLE);
+	 CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
+	 BOOL b = GetConsoleScreenBufferInfo(h1, &bufferInfo);
+	 bufferInfo.wAttributes &= 0x00F0;
+	 SetConsoleTextAttribute (h1, bufferInfo.wAttributes |= i);
+}
+
+//Função gotoxy para interface
+void gotoxy(int x, int y){
+     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),(COORD){x-1,y-1});
+}
+
+//Função da interface
+
+void inter(){
+
+	int i;
+		//canto superior esquerda
+		textcolor(LIGHTYELLOW);
+		gotoxy(1,1);
+        printf("%c",201);
+
+        // Cima
+        for(i = 2; i <= 110; i++){
+            gotoxy(i, 1);
+            textcolor(LIGHTYELLOW);
+            printf("%c", 205);
+        }
+
+        //canto inferior  esquerdo
+        gotoxy(110,1);
+        printf("%c",187);
+
+        //canto superior direito
+        gotoxy(1,40);
+        printf("%c", 200);
+
+        // baixo
+        for(i = 2; i <= 110; i++){
+            gotoxy(i, 40);
+            printf("%c", 205);
+        }
+
+        //canto inferior direito
+        gotoxy(110,40);
+        printf("%c", 188);
+
+        //esquerda
+        for(i = 2; i < 40; i++){
+            gotoxy(1,i);
+            printf("%c", 186);
+        }
+
+        //direita
+        for(i = 2; i < 40; i++){
+            gotoxy(110,i);
+            printf("%c", 186);
+        }
+
+
+	gotoxy(1,1);
+}
+
+
+void desenho(){ //Função que imprime o desenho da pizza na tela principal
+ 		//Vapor
+ 		gotoxy(9,4);
+        textcolor(BRIGHTWHITE);
+        printf("                )  ");
+ 		gotoxy(9,5);
+        textcolor(BRIGHTWHITE);
+        printf("            )  (  (");
+		gotoxy(9,6);
+        textcolor(BRIGHTWHITE);
+        printf("           (   )   )");
+	    gotoxy(9,7);
+        textcolor(BRIGHTWHITE);
+        printf("           )      (");
+        //Pizza
+        gotoxy(9,9);
+        textcolor(LIGHTYELLOW );
+        printf("                88888o_");
+        gotoxy(9,10);
+        textcolor(LIGHTYELLOW );
+        printf("      _o8888888 | o  '888o.   ");
+        gotoxy(9,11);
+        textcolor(LIGHTYELLOW );
+        printf("   .o888' o   | |     .  '88,       ");
+        gotoxy(9,12);
+        textcolor(LIGHTYELLOW );
+        printf(" ,88'  .      | | o .     '88,  ");
+        gotoxy(9,13);
+        textcolor(LIGHTYELLOW);
+        printf(",88'    .   o | |   .    o  88    ");
+        gotoxy(9,14);
+        textcolor(LIGHTYELLOW );
+        printf("88'  o   .    | |o.____ o____88");
+        gotoxy(9,15);
+        textcolor(LIGHTYELLOW );
+        printf("88    o    . o|");
+        gotoxy(9,16);
+        textcolor(LIGHTYELLOW );
+        printf("88 __________.|.____________");
+        gotoxy(9,17);
+        textcolor(LIGHTYELLOW );
+        printf("88       o   .|.    o       88");
+        gotoxy(9,18);
+        textcolor(LIGHTYELLOW );
+        printf("88,    o   .  |  .    o   ,88");
+        gotoxy(9,19);
+        textcolor(LIGHTYELLOW );
+        printf("'88,  o   . o | o .  o   ,88'");
+        gotoxy(9,20);
+        textcolor(LIGHTYELLOW );
+        printf("  '88,   .  o | o  .    ,88");
+        gotoxy(9,21);
+        textcolor(LIGHTYELLOW );
+        printf("   '88, .  o  |  o  .  ,88'");
+        gotoxy(9,22);
+        textcolor(LIGHTYELLOW );
+        printf("     '888   ,_|_,   888'");
+        gotoxy(9,23);
+        textcolor(LIGHTYELLOW );
+        printf("        'o88888888o'");
+}
+
+
+	void titulo(){
+
+    desenho();
+    gotoxy(39,10);
+    textcolor(RED);
+    printf("      ##   ## ");
+    gotoxy(39,11);
+    textcolor(RED);
+    printf("     #########");
+    gotoxy(39,12);
+    textcolor(RED);
+    printf("      #######");
+    gotoxy(39,13);
+    textcolor(RED);
+    printf("       #####  ");
+    gotoxy(39,14);
+    textcolor(RED);
+    printf("         #  ");
+    gotoxy(39,15);
+    textcolor(RED);
+    printf(" ");
+    gotoxy(35,16);
+   	textcolor(RED);                                                                    
+	printf("           ####3   ########   #### 5####################   ########    ");  
+	gotoxy(39,17);
+	textcolor(RED);                                                                    
+	printf("       ####3  ##########  #### 5######### #########7  ##########");  
+	gotoxy(39,18);
+	textcolor(LIGHTRED);                                                                    
+	printf("       ####3  ####  ####  ####     #####      #####   ####  #### ");  
+	gotoxy(39,19);
+	textcolor(LIGHTRED);                                                                    
+	printf("       ####3  #### ####   ####    #####      #####    ##### ####");  
+	gotoxy(39,20);
+	textcolor(LIGHTYELLOW);                                                                    
+	printf("       ####3  ####        ####    ####      #####     ##### ####");  
+	gotoxy(39,21);
+	textcolor(LIGHTYELLOW);                                                                    
+	printf("       ####3  ####        ####   ######### ‘######### ####  ####    ");  
+	gotoxy(39,22);
+	textcolor(YELLOW);                                                                    
+	printf("       ####3  ####        ####  ########## ########## ####  ####  "); 
+	
+}
+
+//Função que desenha as caixinhas
+
+void caixinha(int x, int y, int tamanho, char *texto){
+        //canto superior esquerda
+		textcolor(LIGHTYELLOW);
+		gotoxy(x,y);
+        printf("%c",201);
+        //barra superior
+        int i = x + 1;
+        for(; i < tamanho; i++){
+        gotoxy(i,y);
+        printf("%c", 205);
+        }
+        //canto superior direito
+        gotoxy(tamanho,y++);
+        printf("%c", 187);
+        //esquerda
+        gotoxy(x,y);
+        printf("%c", 186);
+        //texto
+        gotoxy(x+1, y);
+        printf("%s", texto);
+        //direita
+        gotoxy(tamanho,y++);
+        printf("%c", 186);
+        //canto inferior  esquerdo
+        gotoxy(x,y);
+        printf("%c",200);
+        //barra inferior
+        i = x + 1;
+        for(; i < tamanho; i++){
+        gotoxy(i,y);
+        printf("%c", 205);
+        }
+        //canto inferior direito
+        gotoxy(tamanho,y);
+        printf("%c", 188);
+
+
+}
+
+//Struct de cadastros
+typedef struct{
+	
+	char nome[20];
+	char sobrenome[50];
+	int idade;
+	int codigo;	
+	char adm;
+	
+}cadastro_login;
+
+//Variaveis globais
+cadastro_login cad;//variavel do cadastro principal
+
+
+
+//Função que exibe tela para fazer login
+
+void telalogin(){
+	
+	FILE *arq;
+	int temp;
+	int encont=FALSE;
+	
+	arq=fopen("./arq.cadastro", "rb");
+	
+	if(arq==NULL){
+		printf("Erro na abertura do arquivo \n");
+		exit(1);
+	}
+	
+	caixinha(30,9, 90, " Digite seu codigo de acesso: ");
+	gotoxy(61,10);
+	scanf("%d", &temp);
+	fflush(stdin);
+
+	while(fread(&cad, sizeof(cadastro_login), 1, arq)){
+		if(cad.codigo==temp && cad.adm=='s'){
+			encont=TRUE;
+			break;
+			fclose(arq);
+			
+		}else{
+			printf("ELSE DO TELA LOGIN");
+			Sleep(2000);
+		}
+		
+		system("cls");
+		
+	}if(!encont){
+		printf("bonde das maravilhas");
+		Sleep(2000);
+		return;
+		
+	}
+	
+	system("cls");
+	menuadmin();
+	
+}
+
+
+
+//Cadastro principal
+void cadast(){
+	inter();
+	
+	FILE *arq;
+	
+	arq = fopen("./arq.cadastro", "ab");
+	
+	if(arq==NULL){
+		printf("Erro");
+		exit(1);
+	}
+	
+	caixinha(38,5,72, "   DADOS CADASTRAIS DA EMPRESA\n\n\n");
+	
+	fflush(stdin);
+	caixinha(30,9,90, " Primeiro nome: ");
+	gotoxy(46,10);
+	fgets(cad.nome, 20, stdin);
+	fflush(stdin);
+	caixinha(30,13,90, " Sobrenome:" );
+	gotoxy(42,14); 
+	fgets(cad.sobrenome, 50, stdin);
+	fflush(stdin);
+	caixinha(30,17,90, " Idade: ");
+	gotoxy(38, 18);
+	scanf("%d", &cad.idade);
+	fflush(stdin);
+	caixinha(30,21,90, " Insira novo codigo de acesso: ");
+	gotoxy(61, 22);
+	scanf("%d", &cad.codigo);
+	fflush(stdin);
+	caixinha(30, 25, 90, " Voce deseja ter privilegios de adm?: ");
+	gotoxy(68, 26);
+	scanf("%c", &cad.adm);
+	gotoxy(69, 27);
+	fflush(stdin);
+
+    fwrite(&cad, sizeof(cadastro_login), 1, arq); // Salva os dados no arquivo.
+    fclose(arq); // Fecha o arquivo.
+    fflush(stdin);
+    
+    if(cad.adm=='s'){
+    	system("cls");
+    	menuadmin();
+    	
+	}else
+		if(cad.adm=='n'){
+		printf("cu");
+	}
+		
+}
+
+//Função modo administrador 
+void menuadmin(){
+	
+	//Variavel que recebe a opcao do administrador
+	int op_admin;
+	
+	//Printf's para exibir as opções para o administrador
+	if(cad.adm=='s'){
+		printf("\t\t\t\t\tBEM-VINDO GERENTE %s \t\t\t\t\t\t%s ", cad.nome, cad.sobrenome);
+
+	}
+	printf("\n");
+	
+	caixinha(30,9,90, " 1-VISUALIZAR FUNCIONARIOS ");
+	gotoxy(58, 10);
+	caixinha(30,13,90, " 2-ALTERAR DADOS CADASTRAIS ");
+	gotoxy(60,14);
+	caixinha(30,17,90, " 3-CADASTRAR FUNCIONARIOS ");
+	gotoxy(58, 18);
+	caixinha(30,21,90, " 4-CARDAPIO ");
+	gotoxy(43, 22);
+
+	//Leitura da opção do admin
+	
+	caixinha(30,25,90, " ESCOLHA ");
+	gotoxy(40, 26);
+	scanf("%d", &op_admin);
+	
+	
+	//Switch case que chama as funções de acordo com a opção desejada
+	switch(op_admin){
+		
+		case 1:
+			consulta();
+			getchar();
+			system("cls");
+			menuadmin();
+			break;
+		
+		case 2:
+			system("cls"); 
+			altera_login();
+			getchar();
+			system("cls");
+			menuadmin();
+			break;
+			
+		case 3:
+			system("cls");
+			cadastrar_func();
+			getchar();
+			system("cls");
+			menuadmin();
+			break;
+			
+		default: 
+		if(op_admin<1 || op_admin>3){
+			system("cls");
+			printf("Opcao invalida");
+		}
+	} 
+	
+}
+
+//Cadastro de funcinarios
+
+void cadastrar_func(){
+	
+	FILE *arq;
+	
+	arq=fopen("./arq.cadastro", "ab");
+	
+	if(arq==NULL){
+		printf("Erro na criacao do arquivo.\n");
+		exit(1);
+	}
+	
+	fflush(stdin);
+	printf("Primeiro nome: ");
+	fgets(cad.nome, 20, stdin);
+	fflush(stdin);
+	printf("Sobrenome:" );
+	fgets(cad.sobrenome, 50, stdin);
+	fflush(stdin);
+	printf("Idade: ");
+	scanf("%d", &cad.idade);
+	fflush(stdin);
+	printf("Insira novo codigo de acesso: ");
+	scanf("%d", &cad.codigo);
+	fflush(stdin);
+	
+	fwrite(&cad, sizeof(cadastro_login), 1, arq); // Salva os dados no arquivo.
+    fclose(arq); // Fecha o arquivo.
+    fflush(stdin);
+	
+	getchar();
+	
+}
+
+//Função que faz a consulta dos funcionarios 
+
+void consulta(){
+	
+	FILE*arq;
+	
+	arq=fopen("./arq.cadastro", "rb");
+	
+	if(arq==NULL){
+		printf("Problemas na abertura do arquivo \n");
+	}
+	system("cls");
+	
+	
+	caixinha(30,1,90, " \t\t\tDADOS CADASTRAIS ");
+
+	while(fread(&cad, sizeof(cadastro_login), 1, arq)){
+		printf("\n\n");
+		printf("Nome: %s\n ", cad.nome);
+		printf("Sobrenome: %s\n ", cad.sobrenome);
+		printf("Idade: %d\n", cad.idade);
+		printf("Codigo de acesso: %d\n", cad.codigo);
+		printf("\n\n");
+	}
+	
+	fclose(arq);
+	getchar();
+}
+
+
+
+//Quarta função do case admin, altera dados do login administrador
+void altera_login(){
+	
+	FILE *arq;                 //arquivo principal
+	FILE *arqAUX; 			  //arquivo auxiliar
+	int encontrado=FALSE; 	 //variavel para indicar se foi encontrado
+	int code;       		//recebe o codigo de acesso do funcionario para fazer a comparação
+	
+	//Abertura do arquivo principal
+	arq=fopen("./arq.cadastro", "rb");
+	
+	//Recebendo dados de login para comparar
+	printf("Entre com o codigo de acesso do funcionario: ");
+	scanf("%d", &code);
+	
+	//Loop para ler todos os dados do arquivo e pesquisa 
+	while(fread(&cad, sizeof(cadastro_login), 1, arq)){
+		if(cad.codigo==code){ //pesquise se esse codigo de acesso existe 
+			encontrado=TRUE; 
+			break; //para tudo parsa
+		}
+	}
+	
+	system("cls");
+	setbuf(stdin, NULL);
+	
+	//Condição caso não seja encontrado
+	if(!encontrado){
+		printf("Usuario nao encontrado\n");
+		getchar();
+		
+		//Retorna para main
+		return; 
+	}
+	
+	system("cls");
+	
+	//Exibe as informações do administrador
+	printf("INFORMACOES DE CADASTRO\n\n\n\n");
+	printf("Nome: %s\n", cad.nome);
+	printf("Sobrenome: %s\n", cad.sobrenome);
+	printf("Idade: %d\n", cad.idade);
+	printf("Codigo de acesso: %d\n", cad.codigo);
+	printf("\n\n\n");
+	
+	setbuf(stdin, NULL);
+	
+	//novo mundo
+	
+	printf("Primeiro nome: ");
+	fflush(stdin);
+	fgets(cad.nome, 20, stdin);
+	printf("Sobrenome: ");
+	fflush(stdin);
+	fgets(cad.sobrenome, 50, stdin);
+	printf("Idade: ");
+	fflush(stdin);
+	scanf("%d", &cad.idade);
+	fflush(stdin);
+	
+	rewind(arq);
+	
+	if(arq==NULL){
+		printf("Problemas na criacao do arquivo");
+		exit(1);
+		
+	//Else para verificar se existe login um login igual a este	
+	}else{
+		cadastro_login cadAUX;
+		
+		while(fread(&cadAUX, sizeof(cadastro_login), 1, arq)){
+			if(cad.codigo==cadAUX.codigo && cad.codigo!=code){
+				
+				system("cls");
+				
+				printf("Erro, existe login existente");
+				fclose(arq);
+				getchar();
+				return;
+			}
+		}
+	}
+	
+	
+	fclose(arq);
+	
+	arqAUX=fopen("./arq.auxiliar", "ab"); //abre arquivo auxiliar em adição
+	arq=fopen("./arq.cadastro", "rb");   //abre arquivo principal em leitura
+	
+	//Verifica se arquivo foi aberto
+	if(arqAUX ==NULL && arq==NULL){
+		printf("Erro na abertura do arquivo\n");
+		exit(1);
+		
+	}else{
+		
+		//Pega os dados alterados e passa para o arquivo auxiliar
+		fwrite(&cad, sizeof(cadastro_login), 1, arqAUX);
+		
+		while(fread(&cad, sizeof(cadastro_login), 1, arq)){
+			if(cad.codigo!=code){
+			fwrite(&cad, sizeof(cadastro_login), 1, arqAUX);
+			
+			}
+		}
+	}
+	
+	
+	//Fecha a porra toda
+	fclose(arq);
+	fclose(arqAUX);
+	
+	//Renomeia (truque final)
+	
+	remove("./arq.cadastro");
+	rename("./arq.auxiliar", "./arq.cadastro");
+}
+//Terceira função do case admin, altera produtos do cardápio
+
+
+//tela de log
+
+//main	
+int main(){
+	
+	system("mode 110, 40");
+	
+	inter();
+	titulo();
+	getchar();
+	system("cls");
+	telalogin();
+	system("cls");
+	
+	
+	
+
+	
+	return 0;
+}
